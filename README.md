@@ -1,6 +1,6 @@
-{{AppVeyor build status badge for master branch}}
+[![Build status](https://ci.appveyor.com/api/projects/status/gjg8b430d230q51h/branch/master?svg=true)](https://ci.appveyor.com/project/PowerShell/xdismfeature/branch/master)
 
-#{{ModuleName}}
+# xDismFeature
 
 {{Description}}
 
