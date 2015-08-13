@@ -46,19 +46,33 @@ function Set-TargetResource
 
         [parameter(Mandatory = $true)]
         [System.String]
-        $Name
+        $Name,
+
+        [parameter(Mandatory = $false)]
+        [System.Boolean]
+        $EnableAllParentFeatures = $true
     )
 
     switch($Ensure)
     {
         "Present"
         {
-            & dism.exe /Online /Enable-Feature /FeatureName:$Name /quiet /norestart
+            $dismParameters = @("/Online", "/Enable-Feature", "/FeatureName:$Name", "/Quiet", "/NoRestart")
+            if ($EnableAllParentFeatures) {
+                $dismParameters += "/All"
+            }
+            $dismOutput = & dism.exe $dismParameters
         }
         "Absent"
         {
-            & dism.exe /Online /Disable-Feature /FeatureName:$Name /quiet /norestart
+            $dismParameters = @("/Online", "/Disable-Feature", "/FeatureName:$Name", "/Quiet", "/NoRestart")
+            $dismOutput = & dism.exe $dismParameters
         }
+    }
+
+    # If exit code is different than 0 (success) and 3010 (restart required), it means dism.exe has failed
+    if($LASTEXITCODE -ne 0 -and $LASTEXITCODE -ne 3010) {
+        throw "dism.exe failed with code $LASTEXITCODE. Output: $dismOutput"
     }
 
     if(Test-Path -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending')
@@ -80,7 +94,11 @@ function Test-TargetResource
 
         [parameter(Mandatory = $true)]
         [System.String]
-        $Name
+        $Name,
+
+        [parameter(Mandatory = $false)]
+        [System.Boolean]
+        $EnableAllParentFeatures = $true
     )
 
     $result = ((Get-TargetResource -Name $Name).Ensure -eq $Ensure)
