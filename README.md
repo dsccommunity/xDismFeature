@@ -8,7 +8,7 @@ The **xDismFeature** module contains a single resource, **xDismFeature**.
 
 ## Description
 
-The **xDismFeature ** module contains the **xDismFeature** DSC Resource.
+The **xDismFeature** module contains the **xDismFeature** DSC Resource.
 This DSC module enables the install and uninstall of features that require the use of DISM.EXE 
 
 ## Resources
