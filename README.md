@@ -19,7 +19,12 @@ This DSC module enables the install and uninstall of features that require the u
 
 *   **Name**: KEY - The name of the feature to be installed.
 
+*   **Source**: (Optional) Source for features with packages removed. Setting source will also make dism act in "/LimitAccess", or offline-mode.
+
 ## Versions
+
+### Unreleased
+*   Added Source parameter
 
 ### 1.0.0
 
