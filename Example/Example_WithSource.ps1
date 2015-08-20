@@ -34,7 +34,7 @@ Configuration DismCorrectSource {
         {
             Ensure = "Present"
             Name = "NetFx3"
-            Source = "\\tsclient\g\sources\sxs"
+            Source = "C:\sources\sxs"
         }
     }
 }
