@@ -19,7 +19,13 @@ This DSC module enables the install and uninstall of features that require the u
 
 *   **Name**: KEY - The name of the feature to be installed.
 
+*   **EnableAllParentFeatures**: Determines whether to install all parent features when required (default = true)
+
 ## Versions
+
+### Unreleased
+*   Added dism.exe error handling
+*   Added EnableAllParentFeatures parameter
 
 ### 1.0.0
 
