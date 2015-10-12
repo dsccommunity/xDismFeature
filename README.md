@@ -23,8 +23,9 @@ This DSC module enables the install and uninstall of features that require the u
 
 ## Versions
 
-### Unreleased
-*   Added Source parameter
+### 1.1.0.0
+
+* Added source parameter for offline use
 
 ### 1.0.0
 
