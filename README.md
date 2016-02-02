@@ -23,6 +23,8 @@ This DSC module enables the install and uninstall of features that require the u
 
 ## Versions
 
+### Unreleased
+
 ### 1.1.0.0
 
 * Remove UTF8 BOM
