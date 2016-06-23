@@ -6,6 +6,9 @@ The **xDismFeature** module is a part of the Windows PowerShell Desired State Co
 This module enables or disables Windows optional features that specifically need to be handled by DISM.exe.
 The **xDismFeature** module contains a single resource, **xDismFeature**.
 
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
+For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
 ## Description
 
 The **xDismFeature** module contains the **xDismFeature** DSC Resource.
