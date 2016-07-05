@@ -27,6 +27,7 @@ This DSC module enables the install and uninstall of features that require the u
 ## Versions
 
 ### Unreleased
+* Converted appveyor.yml to install Pester from PSGallery instead of from Chocolatey.
 
 ### 1.1.0.0
 
