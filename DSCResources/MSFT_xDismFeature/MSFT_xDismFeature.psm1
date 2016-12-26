@@ -110,7 +110,7 @@ function Test-TargetResource
 
 function Get-DismFeatures
 {
-    $DismGetFeatures = & dism.exe /Online /Get-Features
+    $DismGetFeatures = & dism.exe /Online /Get-Features /English
     $DismFeatures = @{}
     foreach($Line in $DismGetFeatures)
     {
