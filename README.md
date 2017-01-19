@@ -9,6 +9,10 @@ The **xDismFeature** module contains a single resource, **xDismFeature**.
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
+## Contributing
+
+Please read the DSC Resources [contributing guidelines](https://github.com/PowerShell/DscResource.Kit/blob/master/CONTRIBUTING.md) if you would like to contribute.
+
 ## Description
 
 The **xDismFeature** module contains the **xDismFeature** DSC Resource.
@@ -27,6 +31,8 @@ This DSC module enables the install and uninstall of features that require the u
 ## Versions
 
 ### Unreleased
+
+* xDismFeature: Resource no longer includes the Source parameter when it is not specified
 * Converted appveyor.yml to install Pester from PSGallery instead of from Chocolatey.
 
 ### 1.1.0.0
@@ -42,7 +48,6 @@ This DSC module enables the install and uninstall of features that require the u
 ## Examples
 
 ### Enable the Single Instance Storage feature on Windows Server
-
 
 ```powershell
 
@@ -95,6 +100,3 @@ Configuration SIS-Limited
 }
 
 ```
-
-## Contributing
-Please check out common DSC Resources [contributing guidelines](https://github.com/PowerShell/DscResource.Kit/blob/master/CONTRIBUTING.md).
