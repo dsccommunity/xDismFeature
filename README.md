@@ -32,6 +32,8 @@ This DSC module enables the install and uninstall of features that require the u
 
 ### Unreleased
 
+### 1.2.0.0
+
 * xDismFeature: Resource no longer includes the Source parameter when it is not specified
 * Converted appveyor.yml to install Pester from PSGallery instead of from Chocolatey.
 
