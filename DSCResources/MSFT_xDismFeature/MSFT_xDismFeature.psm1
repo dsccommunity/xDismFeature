@@ -52,7 +52,8 @@ function Set-TargetResource
         [System.String]
         $Source
     )
-
+    #Changing the state so delete the cache file as it will no longer be valid.
+    Remove-DismFeaturesCache
     switch($Ensure)
     {
         "Present"
@@ -108,14 +109,47 @@ function Test-TargetResource
 }
 
 
+function Remove-DismFeaturesCache
+{
+    param([switch]$TidyUp)
+    $CacheDirectory = $env:TEMP
+    Get-ChildItem $env:Temp -Filter "xDismFeatures-Cache-$PID.json" | Remove-Item
+    if($TidyUp){
+        Get-ChildItem $env:TEMP -Filter "xDismFeatures-Cache-*.json" | Remove-Item
+    }
+}
+
 function Get-DismFeatures
 {
+    # Takes between 1 and 10 seconds and a lot of disk IO to generate the list.
+    # Therefore makes sense to cache it for a short time.
+    # Have to use a temp file as PoSH variables don't persist.
+    $DismCacheFilePath = "$env:TEMP\xDismFeatures-Cache-$PID.json"
+    $DismFeatures = &{
+        $ErrorActionPreference = "SilentlyContinue"
+        if((Get-Item $DismCacheFilePath).LastWriteTimeUtc -lt [DateTime]::UtcNow.AddMinutes(-5)){
+            Remove-Item $DismCacheFilePath 2>$null
+        }
+        Get-Content $DismCacheFilePath 2>$null | ConvertFrom-Json 2>$null
+    }
+    if($DismFeatures){
+        Write-Verbose "Using cached DISM data"
+        return $DismFeatures
+    }
+    Write-Verbose "Querying DISM..."
+
+    Remove-DismFeaturesCache -TidyUp
+
     $DismGetFeatures = & dism.exe /Online /Get-Features
     $DismFeatures = @{}
     foreach($Line in $DismGetFeatures)
     {
         switch($Line.Split(":")[0].Trim())
         {
+            "Error"
+            {
+                Throw "Dism.exe $Line"
+            }
             "Feature Name"
             {
                 $FeatureName = $Line.Split(":")[1].Trim()
@@ -126,8 +160,11 @@ function Get-DismFeatures
             }
         }
     }
+    $DismFeatures | ConvertTo-Json > $DismCacheFilePath
+    Write-Verbose "Caching DISM data in $DismCacheFilePath"
 
-    $DismFeatures
+    # This is to ensure that all runs get the same format.
+    return ($DismFeatures | ConvertTo-Json | ConvertFrom-Json)
 }
 
 
