@@ -68,11 +68,11 @@ function Set-TargetResource
                 $dismParameters += "/LimitAccess"
             }
 
-            & dism.exe $dismParameters
+            Invoke-Dism $dismParameters
         }
         "Absent"
         {
-            & dism.exe /Online /Disable-Feature /FeatureName:$Name /quiet /norestart
+            Invoke-Dism @("/Online", "/Disable-Feature", "/FeatureName:$Name", "/quiet", "/norestart")
         }
     }
 
@@ -110,7 +110,7 @@ function Test-TargetResource
 
 function Get-DismFeatures
 {
-    $DismGetFeatures = & dism.exe /Online /Get-Features /English
+    $DismGetFeatures = Invoke-Dism @('/Online', '/Get-Features', '/English')
     $DismFeatures = @{}
     foreach($Line in $DismGetFeatures)
     {
@@ -128,6 +128,19 @@ function Get-DismFeatures
     }
 
     $DismFeatures
+}
+
+
+function Invoke-Dism
+{
+    param
+    (
+        [Parameter(Mandatory = $true, Position = 0)]
+        [System.String[]]
+        $DismParameters
+    )
+
+    & Dism.exe $DismParameters
 }
 
 
