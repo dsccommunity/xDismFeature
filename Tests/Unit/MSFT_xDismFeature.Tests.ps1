@@ -70,9 +70,9 @@ The operation completed successfully.
             Context 'Feature exists and is enabled' {
 
                 It 'Should return the "Present" hashtable' {
-                    $GetTargetResult = Get-TargetResource -Name $TestEnabledFeature1
-                    $GetTargetResult.Ensure | Should -Be 'Present'
-                    $GetTargetResult.Name | Should -Be $TestEnabledFeature1
+                    $getTargetResult = Get-TargetResource -Name $TestEnabledFeature1
+                    $getTargetResult.Ensure | Should -Be 'Present'
+                    $getTargetResult.Name | Should -Be $TestEnabledFeature1
                 }
 
             }
@@ -80,9 +80,9 @@ The operation completed successfully.
             Context 'Feature exists and is disabled' {
 
                 It 'Should return the "Absent" hashtable' {
-                    $GetTargetResult = Get-TargetResource -Name $TestDisabledFeature1
-                    $GetTargetResult.Ensure | Should -Be 'Absent'
-                    $GetTargetResult.Name | Should -Be $TestDisabledFeature1
+                    $getTargetResult = Get-TargetResource -Name $TestDisabledFeature1
+                    $getTargetResult.Ensure | Should -Be 'Absent'
+                    $getTargetResult.Name | Should -Be $TestDisabledFeature1
                 }
 
             }
@@ -90,9 +90,9 @@ The operation completed successfully.
             Context 'Feature exists but the status is neither enabled nor disabled' {
 
                 It 'Should return the "Absent" hashtable' {
-                    $GetTargetResult = Get-TargetResource -Name $TestUnknownStateFeature1
-                    $GetTargetResult.Ensure | Should -Be 'Absent'
-                    $GetTargetResult.Name | Should -Be $TestUnknownStateFeature1
+                    $getTargetResult = Get-TargetResource -Name $TestUnknownStateFeature1
+                    $getTargetResult.Ensure | Should -Be 'Absent'
+                    $getTargetResult.Name | Should -Be $TestUnknownStateFeature1
                 }
                 
             }
@@ -192,13 +192,13 @@ The operation completed successfully.
             Context 'Feature is in the desired state' {
 
                 It 'Should return $true when Ensure set to Present and Feature is enabled' {
-                    $TestTargetResult = Test-TargetResource -Ensure 'Present' -Name $TestEnabledFeature1
-                    $TestTargetResult | Should -Be $true
+                    $testTargetResult = Test-TargetResource -Ensure 'Present' -Name $TestEnabledFeature1
+                    $testTargetResult | Should -Be $true
                 }
 
                 It 'Should return $true when Ensure set to Absent and Feature is disabled' {
-                    $TestTargetResult = Test-TargetResource -Ensure 'Absent' -Name $TestDisabledFeature1
-                    $TestTargetResult | Should -Be $true
+                    $testTargetResult = Test-TargetResource -Ensure 'Absent' -Name $TestDisabledFeature1
+                    $testTargetResult | Should -Be $true
                 }
 
             }
@@ -206,13 +206,13 @@ The operation completed successfully.
             Context 'Feature is not in the desired state' {
 
                 It 'Should return $false when Ensure set to Present and Feature is disabled' {
-                    $TestTargetResult = Test-TargetResource -Ensure 'Present' -Name $TestDisabledFeature1
-                    $TestTargetResult | Should -Be $false
+                    $testTargetResult = Test-TargetResource -Ensure 'Present' -Name $TestDisabledFeature1
+                    $testTargetResult | Should -Be $false
                 }
 
                 It 'Should return $false when Ensure set to Absent and Feature is enabled' {
-                    $TestTargetResult = Test-TargetResource -Ensure 'Absent' -Name $TestEnabledFeature1
-                    $TestTargetResult | Should -Be $false
+                    $testTargetResult = Test-TargetResource -Ensure 'Absent' -Name $TestEnabledFeature1
+                    $testTargetResult | Should -Be $false
                 }
 
             }
@@ -227,10 +227,10 @@ The operation completed successfully.
                 It 'Should return the correct hashtable' {
                     Mock Invoke-Dism { return $ValidDismGetFeaturesOutput.Split("`n`r") }
 
-                    $GetDismFeaturesResult = Get-DismFeatures
-                    $GetDismFeaturesResult.Count | Should -Be 2
-                    $GetDismFeaturesResult[$TestEnabledFeature1] | Should -Be 'Enabled'
-                    $GetDismFeaturesResult[$TestDisabledFeature1] | Should -Be 'Disabled'
+                    $getDismFeaturesResult = Get-DismFeatures
+                    $getDismFeaturesResult.Count | Should -Be 2
+                    $getDismFeaturesResult[$TestEnabledFeature1] | Should -Be 'Enabled'
+                    $getDismFeaturesResult[$TestDisabledFeature1] | Should -Be 'Disabled'
                 }
 
             }
@@ -240,9 +240,9 @@ The operation completed successfully.
                 It 'Should return the empty hashtable' {
                     Mock Invoke-Dism { return "" }
 
-                    $GetDismFeaturesResult = Get-DismFeatures
-                    $GetDismFeaturesResult | Should -BeOfType System.Collections.Hashtable
-                    $GetDismFeaturesResult.Count | Should -Be 0
+                    $getDismFeaturesResult = Get-DismFeatures
+                    $getDismFeaturesResult | Should -BeOfType System.Collections.Hashtable
+                    $getDismFeaturesResult.Count | Should -Be 0
                 }
 
             }
