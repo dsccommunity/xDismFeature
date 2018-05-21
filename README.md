@@ -32,6 +32,9 @@ This DSC module enables the install and uninstall of features that require the u
 
 ### Unreleased
 
+* Added unit test
+* Fixed issue that Test-TargetResource always fails on non-English OS [#11](https://github.com/PowerShell/xDismFeature/issues/11)
+
 ### 1.2.0.0
 
 * xDismFeature: Resource no longer includes the Source parameter when it is not specified
