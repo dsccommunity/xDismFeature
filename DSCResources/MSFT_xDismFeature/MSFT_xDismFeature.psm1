@@ -57,22 +57,22 @@ function Set-TargetResource
     {
         "Present"
         {
-            $dismParameters = @("/Online", "/Enable-Feature", "/FeatureName:$Name", "/Quiet", "/NoRestart")
+            $dismArguments = @("/Online", "/Enable-Feature", "/FeatureName:$Name", "/Quiet", "/NoRestart")
 
             # Include sources directory if present
             if ($Source)
             {
                 Write-Verbose "Source location set: ${Source}"
 
-                $dismParameters += "/Source:${Source}"
-                $dismParameters += "/LimitAccess"
+                $dismArguments += "/Source:${Source}"
+                $dismArguments += "/LimitAccess"
             }
 
-            Invoke-Dism $dismParameters
+            Invoke-Dism -Arguments $dismArguments
         }
         "Absent"
         {
-            Invoke-Dism @("/Online", "/Disable-Feature", "/FeatureName:$Name", "/quiet", "/norestart")
+            Invoke-Dism -Arguments @("/Online", "/Disable-Feature", "/FeatureName:$Name", "/quiet", "/norestart")
         }
     }
 
@@ -110,7 +110,7 @@ function Test-TargetResource
 
 function Get-DismFeatures
 {
-    $DismGetFeatures = Invoke-Dism @('/Online', '/Get-Features', '/English')
+    $DismGetFeatures = Invoke-Dism -Arguments @('/Online', '/Get-Features', '/English')
     $DismFeatures = @{}
     foreach($Line in $DismGetFeatures)
     {
@@ -135,12 +135,12 @@ function Invoke-Dism
 {
     param
     (
-        [Parameter(Mandatory = $true, Position = 0)]
+        [Parameter(Mandatory = $true)]
         [System.String[]]
-        $DismParameters
+        $Arguments
     )
 
-    & Dism.exe $DismParameters
+    & Dism.exe $Arguments
 }
 
 

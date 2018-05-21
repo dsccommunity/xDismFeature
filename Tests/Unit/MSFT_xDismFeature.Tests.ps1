@@ -111,10 +111,10 @@ The operation completed successfully.
                         
                     Assert-MockCalled -CommandName Invoke-Dism -Times 1 -Exactly -Scope It `
                         -ParameterFilter {
-                            $DismParameters -contains "/Online" -and `
-                            $DismParameters -contains "/Enable-Feature" -and `
-                            $DismParameters -contains "/FeatureName:$TestDisabledFeature1" -and `
-                            $DismParameters -notcontains "/Source:$TestSourcePath1"
+                            $Arguments -contains "/Online" -and `
+                            $Arguments -contains "/Enable-Feature" -and `
+                            $Arguments -contains "/FeatureName:$TestDisabledFeature1" -and `
+                            $Arguments -notcontains "/Source:$TestSourcePath1"
                     }
                 }
             }
@@ -126,11 +126,11 @@ The operation completed successfully.
                         
                     Assert-MockCalled -CommandName Invoke-Dism -Times 1 -Exactly -Scope It `
                         -ParameterFilter {
-                            $DismParameters -contains "/Online" -and `
-                            $DismParameters -contains "/Enable-Feature" -and `
-                            $DismParameters -contains "/FeatureName:$TestDisabledFeature1" -and `
-                            $DismParameters -contains "/Source:$TestSourcePath1" -and `
-                            $DismParameters -contains "/LimitAccess"
+                            $Arguments -contains "/Online" -and `
+                            $Arguments -contains "/Enable-Feature" -and `
+                            $Arguments -contains "/FeatureName:$TestDisabledFeature1" -and `
+                            $Arguments -contains "/Source:$TestSourcePath1" -and `
+                            $Arguments -contains "/LimitAccess"
                     }
                 }
             }
@@ -142,9 +142,9 @@ The operation completed successfully.
                     
                     Assert-MockCalled -CommandName Invoke-Dism -Times 1 -Exactly -Scope It `
                         -ParameterFilter {
-                            $DismParameters -contains "/Online" -and `
-                            $DismParameters -contains "/Disable-Feature" -and `
-                            $DismParameters -contains "/FeatureName:$TestDisabledFeature1"
+                            $Arguments -contains "/Online" -and `
+                            $Arguments -contains "/Disable-Feature" -and `
+                            $Arguments -contains "/FeatureName:$TestDisabledFeature1"
                     }
                 }
             }
