@@ -16,7 +16,7 @@ Please read the DSC Resources [contributing guidelines](https://github.com/Power
 ## Description
 
 The **xDismFeature** module contains the **xDismFeature** DSC Resource.
-This DSC module enables the install and uninstall of features that require the use of DISM.EXE 
+This DSC module enables the install and uninstall of features that require the use of DISM.EXE
 
 ## Resources
 
@@ -31,6 +31,9 @@ This DSC module enables the install and uninstall of features that require the u
 ## Versions
 
 ### Unreleased
+
+* Update appveyor.yml to use the default template.
+* Added default template files .codecov.yml, .gitattributes, and .gitignore, and .vscode folder.
 
 ### 1.3.0.0
 
@@ -49,8 +52,8 @@ This DSC module enables the install and uninstall of features that require the u
 
 ### 1.0.0
 
-*   Initial release with the following resources 
-    *   xDismFeature 
+*   Initial release with the following resources
+    *   xDismFeature
 
 ## Examples
 
@@ -68,23 +71,23 @@ This DSC module enables the install and uninstall of features that require the u
         }
 
     }
-    
-    Configuration SIS-Limited 
-    { 
-        Import-DscResource -Module xDismFeature 
-     
-        Node 'NodeName' 
-        { 
-            Ensure = 'Present' 
-            Name = 'SIS-Limited' 
-        } 
+
+    Configuration SIS-Limited
+    {
+        Import-DscResource -Module xDismFeature
+
+        Node 'NodeName'
+        {
+            Ensure = 'Present'
+            Name = 'SIS-Limited'
+        }
     }
 ```
 
 ### Disable the Single Instance Storage feature on Windows Server.
 
 ```powershell
-    
+
 Configuration SIS-Limited
 {
     Import-DscResource -Module xDismFeature
@@ -95,15 +98,15 @@ Configuration SIS-Limited
     }
 }
 
-Configuration SIS-Limited 
-{ 
-    Import-DscResource -Module xDismFeature 
+Configuration SIS-Limited
+{
+    Import-DscResource -Module xDismFeature
 
-    Node 'NodeName' 
-    { 
-        Ensure = 'Absent' 
-        Name = 'SIS-Limited' 
-    } 
+    Node 'NodeName'
+    {
+        Ensure = 'Absent'
+        Name = 'SIS-Limited'
+    }
 }
 
 ```
