@@ -1,6 +1,14 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/gjg8b430d230q51h/branch/master?svg=true)](https://ci.appveyor.com/project/PowerShell/xdismfeature/branch/master)
+# **THIS MODULE HAS BEEN DEPRECATED**
 
-# xDismFeature
+It will no longer be released. If you have workloads that are in need of
+the resource `xDismFeature` and where the resource [`xWindowsFeature`](https://github.com/dsccommunity/xPSDesiredStateConfiguration#xwindowsfeature)
+or the resource [`WindowsCapability`](https://github.com/dsccommunity/ComputerManagementDsc)
+cannot be used as a replacement, then please reach out in the [Slack #DSC channel](https://dsccommunity.org/community/contact/) and let the DSC
+Community know.
+
+## xDismFeature
+
+[![Build status](https://ci.appveyor.com/api/projects/status/gjg8b430d230q51h/branch/master?svg=true)](https://ci.appveyor.com/project/PowerShell/xdismfeature/branch/master)
 
 The **xDismFeature** module is a part of the Windows PowerShell Desired State Configuration (DSC) Resource Kit, which is a collection of DSC Resources produced by the PowerShell Team.
 This module enables or disables Windows optional features that specifically need to be handled by DISM.exe.
